@@ -1,411 +1,309 @@
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>SMM Panel — Instagram / YouTube / Facebook</title>
-<style>
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  min-height: 100vh;
-  margin: 0;
-  color: #fff;
-}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SMM Panel — Cheapest Instagram & YouTube</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg,  #FFA500, #1a1a2e, #FFA500);
+      color: #fff;
+      min-height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      padding: 30px 10px 10px;
+      font-size: 2.8rem;
+      background: linear-gradient(90deg, #a5b4fc, #67e8f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    .tagline { text-align: center; color: #94a3b8; margin-bottom: 30px; }
 
-/* Heading */
-h1 {
-  text-align: center;
-  padding: 25px 10px;
-  font-size: 2rem;
-  font-weight: 700;
-  background: linear-gradient(90deg, #38bdf8, #6366f1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 15px; }
 
-/* Glass Cards */
-.platform-box {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(15px);
-  border-radius: 20px;
-  margin: 20px auto;
-  padding: 20px;
-  max-width: 480px;
-  border: 1px solid rgba(255,255,255,0.1);
-  transition: transform 0.3s ease;
-}
+    .platform-box {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 25px;
+      margin: 25px 0;
+      transition: all 0.4s ease;
+    }
+    .platform-box:hover {
+      transform: translateY(-10px);
+      border-color: #67e8f9;
+      box-shadow: 0 20px 40px rgba(103, 232, 249, 0.15);
+    }
 
-.platform-box:hover {
-  transform: translateY(-5px);
-}
+    .platform-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .platform-title img { width: 38px; height: 38px; }
 
-/* Platform Title */
-.platform-title {
-  display: flex;
-  align-items: center;
-  font-size: 1.4em;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #e2e8f0;
-}
+    .service {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.08);
+      padding: 16px 20px;
+      border-radius: 16px;
+      margin: 12px 0;
+      transition: all 0.3s;
+    }
+    .service:hover {
+      background: rgba(103, 232, 249, 0.15);
+      transform: scale(1.02);
+    }
+    .price { font-size: 1.35rem; font-weight: 700; color: #67e8f9; }
 
-.platform-title img {
-  width: 28px;
-  height: 28px;
-  margin-right: 10px;
-}
+    button {
+      background: linear-gradient(135deg, #6366f1, #22d3ee);
+      border: none;
+      padding: 10px 24px;
+      border-radius: 12px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover { transform: scale(1.08); }
 
-/* Service Items */
-.service {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(255,255,255,0.08);
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin: 10px 0;
-  transition: all 0.2s ease;
-}
+    .big-btn {
+      background: linear-gradient(135deg, #22c55e, #86efac);
+      padding: 14px 32px;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
 
-.service:hover {
-  background: rgba(255,255,255,0.15);
-}
+    .modal {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none; justify-content: center; align-items: center; z-index: 1000;
+    }
+    .modal-content {
+      background: #1e2937;
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      border: 1px solid #67e8f9;
+    }
 
-.service span {
-  font-size: 0.95em;
-  color: #e5e7eb;
-}
-
-/* Buttons */
-button {
-  background: linear-gradient(135deg, #3b82f6, #6366f1);
-  border: none;
-  border-radius: 10px;
-  padding: 8px 16px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-button:hover {
-  transform: scale(1.05);
-  background: linear-gradient(135deg, #2563eb, #4f46e5);
-}
-
-/* Big Button */
-.big-btn {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  padding: 12px 20px;
-  font-size: 1.1em;
-  border-radius: 12px;
-}
-
-.big-btn:hover {
-  background: linear-gradient(135deg, #16a34a, #15803d);
-}
-
-/* Modals */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(15, 23, 42, 0.8);
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background: #1e293b;
-  border-radius: 16px;
-  padding: 25px;
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-/* Input Fields */
-.input-field input {
-  width: 85%;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background: #0f172a;
-  color: white;
-  border: 1px solid rgba(255,255,255,0.2);
-}
-
-/* Toast */
-.toast {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #22c55e;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 20px;
-  display: none;
-}
-
-/* QR Section */
-.qr-code canvas {
-  border-radius: 12px;
-  background: white;
-  padding: 10px;
-}
-
-/* Countdown */
-#countdown {
-  color: #f87171;
-  font-weight: bold;
-}
-
-/* Reload Button */
-#reloadQRBtn {
-  background: #3b82f6;
-  border-radius: 10px;
-}
-
-#reloadQRBtn:hover {
-  background: #2563eb;
-}
-</style>
+    .toast {
+      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+      background: #22c55e; color: white; padding: 14px 28px;
+      border-radius: 50px; font-weight: 600; display: none; z-index: 2000;
+    }
+  </style>
 </head>
 <body>
-<h1>best smm service provider</h1>
+  <h1>CHEAP SMM PANEL</h1>
+  <p class="tagline">Super Cheap • Instant Delivery • Real Results</p>
 
-<div id="services"></div>
+  <div class="container" id="services"></div>
 
-<!-- Username Verification Modal -->
-<div class="modal" id="verifyModal">
-  <div class="modal-content">
-    <h2 id="verifyTitle">Verify</h2>
-    <div class="input-field">
-      <label id="verifyLabel" for="verifyInput"></label>
-      <input type="text" id="verifyInput" placeholder="">
+  <!-- Verify Modal -->
+  <div class="modal" id="verifyModal">
+    <div class="modal-content">
+      <h2 id="verifyTitle">Verify</h2>
+      <p id="verifyLabel" style="margin:15px 0 8px; font-size:1.1rem;"></p>
+      <input type="text" id="verifyInput" style="width:100%; padding:14px; border-radius:12px; background:#0f172a; border:1px solid #64748b; color:white; font-size:1rem;" placeholder="">
+      <button onclick="verifyUser()" style="margin-top:20px; width:100%; padding:14px;">Verify & Continue →</button>
+      <button onclick="closeModal('verifyModal')" style="margin-top:10px; background:#475569; width:100%; padding:12px;">Cancel</button>
     </div>
-    <button onclick="verifyUser()">Verify</button>
-    <button class="close-btn" onclick="closeModal('verifyModal')">Cancel</button>
   </div>
-</div>
 
-<!-- QR Modal with More Payment App Icons -->
-<div class="modal" id="qrModal">
-  <div class="modal-content" style="max-width:400px;align-items:center;">
-    <h2>Scan to Pay via any UPI apps </h2>
-    <div class="payment-logos" style="margin:10px 0;">
-     <div class="payment-logos" style="margin:0px 0; display:flex; justify-content:center; flex-wrap:wrap; gap:8px;">
-  
-</div>
+  <!-- QR Modal -->
+  <div class="modal" id="qrModal">
+    <div class="modal-content" style="max-width:440px;">
+      <h2>Scan to Pay via UPI</h2>
+      <div id="amountDisplay" style="font-size:1.8rem; font-weight:bold; margin:15px 0; color:#67e8f9;"></div>
+      
+      <div class="qr-code" style="margin:15px 0; background:white; padding:15px; border-radius:16px; display:inline-block;">
+        <canvas id="qrcode" style="width:260px; height:260px;"></canvas>
+      </div>
 
+      <div id="countdown" style="font-size:1.3rem; font-weight:bold; color:#f87171; margin:12px 0;"></div>
+
+      <div style="margin:20px 0;">
+        <label style="display:block; margin-bottom:8px;">Enter UTR / Transaction ID</label>
+        <input type="text" id="utrInput" placeholder="Enter full UTR" style="width:100%; padding:14px; border-radius:12px; background:#0f172a; border:1px solid #64748b; color:white;">
+      </div>
+
+      <button class="big-btn" onclick="verifyUTR()" style="width:100%; margin:10px 0;">✅ I Have Paid - Verify Payment</button>
+      <button id="reloadQRBtn" style="display:none; width:100%; padding:12px; background:#3b82f6;">🔄 Reload QR Code</button>
+      
+      <button onclick="closeModal('qrModal')" style="margin-top:15px; background:#475569; width:100%; padding:12px;">Cancel</button>
     </div>
+  </div>
 
-    <div class="qr-code" style="margin:5px 0;">
-      <canvas id="qrcode" style="width:400px;height:400px;"></canvas>
+  <!-- Success Modal -->
+  <div class="modal" id="paymentSuccessModal">
+    <div class="modal-content">
+      <h2>Payment not recived!</h2>
+      <p id="successService" style="margin:15px 0; font-size:1.1rem;"></p>
+      <p id="successUserInput" style="margin:10px 0;"></p>
+      <p>Please enter correct utr<br>Please check the payment utr.</p>
+      <button class="big-btn" onclick="closeModal('paymentSuccessModal')" style="width:100%; margin-top:20px;">OK</button>
     </div>
-    <div id="amountDisplay" style="font-size:1.6em;font-weight:bold;margin:10px 0;"></div>
-    <div style="margin-bottom:15px;"></div>
-
-    <!-- Countdown -->
-    <div id="countdown" style="margin:10px 0;font-size:1.2em;color:#f00;"></div>
-
-    <!-- UTR Input -->
-    <div class="input-field" id="utrField">
-      <label for="utrInput">Enter your Payment UTR/TXN ID</label>
-      <input type="text" id="utrInput" placeholder="Enter full UTR">
-    </div>
-
-    <!-- Big Green Payment Complete Button -->
-    <button class="big-btn" onclick="verifyUTR()" style="margin-top:10px;">✅ Payment Completed</button>
-
-    <div id="qrExpiredMsg" style="display:none;font-weight:bold;color:#f00;margin:10px 0;">⚠️ QR expired, please reload</div>
-    <button id="reloadQRBtn" style="display:none;">🔁 Reload QR Code</button>
-    <button class="close-btn" onclick="closeModal('qrModal')">Cancel</button>
   </div>
-</div>
-<!-- Payment Not Completed Modal -->
-<div class="modal" id="paymentFailModal">
-  <div class="modal-content">
-    <h2>Payment not completed ❌</h2>
-    <p>Please try again.</p>
-    <button onclick="backToQR()">Back to QR</button>
-  </div>
-</div>
 
-<!-- Payment Success Modal -->
-<div class="modal" id="paymentSuccessModal">
-  <div class="modal-content">
-    <h2>✅ Payment Verified!</h2>
-    <p id="successService"></p>
-    <p id="successUserInput"></p>
-    <p>Your service will be provided soon!</p>
-    <button class="big-btn" onclick="closeModal('paymentSuccessModal')">OK</button>
-  </div>
-</div>
+  <div class="toast" id="toast">Success</div>
 
-<div class="toast" id="toast">Verified successfully ✅</div>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script>
+    const UPI_ID = 'bestsmm1231@nyes';
+    const MERCHANT_NAME = 'Social Media Booster';
 
-<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-<script>
-const UPI_ID = 'bestsmm1234@ybl';
-const MERCHANT_NAME = 'Social Media Booster';
-// Multiple valid UTR prefixes
-const UTR_PREFIXES = ["FMPI","ok","T","UTR","utr"];
+    let currentService = null;
+    let timerInterval;
 
-const SERVICES = [
-  {platform:'Instagram',icon:'https://cdn-icons-png.flaticon.com/512/174/174855.png',items:[
-    {name:'Instagram 1.5k Followers',price:12,verifyField:{label:'Enter Instagram username',placeholder:'@username'}},
-    {name:'Instagram 10k Followers',price:69,verifyField:{label:'Enter Instagram username',placeholder:'@username'}},
-	 {name:'Instagram Permanent blue tick ☑️',price:109,verifyField:{label:'Enter Instagram username',placeholder:'@username'}},
-    {name:'Instagram 5k Likes',price:25,verifyField:{label:'Enter Post/Reel link',placeholder:'Paste link here'}},
-    {name:'Instagram 100k Reels Views',price:55,verifyField:{label:'Enter Reel link',placeholder:'Paste reel link'}}
-  ]},
-  {platform:'YouTube',icon:'https://cdn-icons-png.flaticon.com/512/1384/1384060.png',items:[
-    {name:'YouTube 1k Subscribers',price:49,verifyField:{label:'Enter Channel name',placeholder:'Channel name'}},
-    {name:'YouTube 10k Subscribers',price:499,verifyField:{label:'Enter Channel URL',placeholder:'Paste channel URL'}},
-    {name:'YouTube 5k Video Views',price:320,verifyField:{label:'Enter Video URL',placeholder:'Paste video link'}},
-    {name:'YouTube 10k Shorts Views',price:152,verifyField:{label:'Enter Shorts link',placeholder:'Paste shorts link'}},
-    {name:'YouTube 4000H Watchtime',price:999,verifyField:{label:'Enter Channel URL',placeholder:'Paste channel URL'}}
-  ]},
-  {platform:'Facebook',icon:'https://cdn-icons-png.flaticon.com/512/733/733547.png',items:[
-    {name:'Facebook 1k Followers',price:19,verifyField:{label:'Enter Facebook profile/page link',placeholder:'Paste profile or page link'}},
-    {name:'Facebook 10k Followers',price:189,verifyField:{label:'Enter Facebook page/profile link',placeholder:'Paste profile/page link'}},
-    {name:'Facebook 10k Reels Views',price:49,verifyField:{label:'Enter Reel link',placeholder:'Paste reel link'}},
-    {name:'Facebook 5k Reels Likes',price:29,verifyField:{label:'Enter Reel link',placeholder:'Paste reel link'}}
-  ]}
-];
+    const SERVICES = [
+      {platform:'Instagram', icon:'https://cdn-icons-png.flaticon.com/512/174/174855.png', items:[
+        {name:'2500 Instagram Followers', price:15, verifyField:{label:'Enter Instagram Username', placeholder:'@username'}},
+        {name:'10,000 Instagram Followers', price:59, verifyField:{label:'Enter Instagram Username', placeholder:'@username'}},
+        {name:'Instagram Permanent Blue Tick', price:99, verifyField:{label:'Enter Instagram Username', placeholder:'@username'}},
+        {name:'50,000 Reel Views', price:35, verifyField:{label:'Enter Reel Link', placeholder:'Paste link'}},
+        {name:'10,000 Likes', price:55, verifyField:{label:'Enter Post/Reel Link', placeholder:'Paste link'}}
+      ]},
+      {platform:'YouTube', icon:'https://cdn-icons-png.flaticon.com/512/1384/1384060.png', items:[
+        {name:'2,000 YouTube Subscribers', price:89, verifyField:{label:'Enter Channel URL', placeholder:'Paste channel link'}},
+        {name:'10,000 YouTube Subscribers', price:399, verifyField:{label:'Enter Channel URL', placeholder:'Paste channel link'}},
+        {name:'100,000 Video Views', price:129, verifyField:{label:'Enter Video URL', placeholder:'Paste link'}},
+        {name:'500,000 Shorts Views', price:199, verifyField:{label:'Enter Shorts Link', placeholder:'Paste link'}}
+      ]},
+      {platform:'Facebook', icon:'https://cdn-icons-png.flaticon.com/512/733/733547.png', items:[
+        {name:'5,000 Facebook Followers', price:25, verifyField:{label:'Enter Profile/Page Link', placeholder:'Paste link'}},
+        {name:'20,000 Reels Views', price:35, verifyField:{label:'Enter Reel Link', placeholder:'Paste link'}}
+      ]}
+    ];
 
-let currentService = null;
-let timerInterval;
-
-function renderServices(){
-  const container=document.getElementById('services');
-  SERVICES.forEach(group=>{
-    const box=document.createElement('div');
-    box.className='platform-box';
-    box.innerHTML=`<div class='platform-title'><img src="${group.icon}"/> ${group.platform}</div>`;
-    group.items.forEach(s=>{
-      const row=document.createElement('div');
-      row.className='service';
-      row.innerHTML=`<span>${s.name} — ₹${s.price}</span><button onclick='openVerify(${JSON.stringify(s)})'>Buy</button>`;
-      box.appendChild(row);
-    });
-    container.appendChild(box);
-  });
-}
-
-function openVerify(service){
-  currentService=service;
-  document.getElementById('verifyTitle').innerText=`Verify ${service.name}`;
-  document.getElementById('verifyLabel').innerText=service.verifyField.label;
-  document.getElementById('verifyInput').placeholder=service.verifyField.placeholder;
-  document.getElementById('verifyInput').value='';
-  document.getElementById('verifyInput').focus();
-  document.getElementById('verifyModal').style.display='flex';
-}
-
-function closeModal(id){document.getElementById(id).style.display='none'}
-
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.innerText=msg;t.style.display='block';
-  setTimeout(()=>{t.style.display='none'},2000);
-}
-
-function verifyUser(){
-  const input=document.getElementById('verifyInput').value.trim();
-  if(!input){alert('Please fill the required field');return;}
-  closeModal('verifyModal');
-  showToast('Verified successfully ✅');
-  setTimeout(openQR,500);
-}
-
-function openQR(){
-  const amount=currentService.price;
-  document.getElementById('amountDisplay').innerText = `Amount ₹${amount}`;
-  const upiUrl=`upi://pay?pa=${UPI_ID}&pn=${MERCHANT_NAME}&am=${amount}&cu=INR`;
-  const canvas = document.getElementById('qrcode');
-  canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-  QRCode.toCanvas(canvas, upiUrl, {width:220, height:220}, err=>{if(err)console.error(err)});
-
-  document.getElementById('qrExpiredMsg').style.display='none';
-  document.getElementById('reloadQRBtn').style.display='none';
-  document.getElementById('qrcode').style.display='flex';
-  document.getElementById('utrInput').value='';
-
-  document.getElementById('qrModal').style.display='flex';
-  startCountdown(5*60);
-}
-
-function startCountdown(seconds){
-  clearInterval(timerInterval);
-  let remaining=seconds;
-  const countdownEl = document.getElementById('countdown');
-  countdownEl.innerText = formatTime(remaining);
-
-  timerInterval = setInterval(()=>{
-    remaining--;
-    countdownEl.innerText = formatTime(remaining);
-    if(remaining <= 0){
-      clearInterval(timerInterval);
-      countdownEl.innerText = '';
-      document.getElementById('qrcode').style.display='none';
-      document.getElementById('qrExpiredMsg').style.display='block';
-      document.getElementById('reloadQRBtn').style.display='inline-block';
+    function renderServices(){
+      const container = document.getElementById('services');
+      container.innerHTML = '';
+      SERVICES.forEach(group => {
+        const box = document.createElement('div');
+        box.className = 'platform-box';
+        box.innerHTML = `<div class='platform-title'><img src="${group.icon}"/> ${group.platform}</div>`;
+        
+        group.items.forEach(s => {
+          const row = document.createElement('div');
+          row.className = 'service';
+          row.innerHTML = `
+            <span>${s.name}</span>
+            <div style="text-align:right">
+              <span class="price">₹${s.price}</span><br>
+              <button onclick='openVerify(${JSON.stringify(s)})'>Buy Now</button>
+            </div>`;
+          box.appendChild(row);
+        });
+        container.appendChild(box);
+      });
     }
-  },1000);
-}
 
-function formatTime(sec){
-  const m = String(Math.floor(sec/60)).padStart(2,'0');
-  const s = String(sec%60).padStart(2,'0');
-  return `⏱️ ${m}:${s}`;
-}
+    function openVerify(service){
+      currentService = service;
+      document.getElementById('verifyTitle').innerText = service.name;
+      document.getElementById('verifyLabel').innerText = service.verifyField.label;
+      document.getElementById('verifyInput').placeholder = service.verifyField.placeholder;
+      document.getElementById('verifyInput').value = '';
+      document.getElementById('verifyModal').style.display = 'flex';
+    }
 
-document.getElementById('reloadQRBtn').onclick = function(){ openQR(); };
+    function closeModal(id){
+      document.getElementById(id).style.display = 'none';
+    }
 
-function paymentNotCompleted(){
-  closeModal('qrModal');
-  document.getElementById('paymentFailModal').style.display='flex';
-}
+    function showToast(msg){
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.style.display = 'block';
+      setTimeout(() => t.style.display = 'none', 2500);
+    }
 
-function backToQR(){
-  closeModal('paymentFailModal');
-  openQR();
-}
+    function verifyUser(){
+      if(!document.getElementById('verifyInput').value.trim()){
+        alert("Please enter the required details");
+        return;
+      }
+      closeModal('verifyModal');
+      showToast('✅ Verified Successfully');
+      setTimeout(openQR, 600);
+    }
 
-// UTR verification with multiple prefixes
-function verifyUTR(){
-  const userUTR = document.getElementById('utrInput').value.trim().toUpperCase();
-  if(!userUTR){
-    alert('Please enter your UTR.');
-    return;
-  }
+    function openQR(){
+      const amount = currentService.price;
+      document.getElementById('amountDisplay').innerText = `₹${amount} to Pay`;
 
-  const firstFour = userUTR.substring(0,4);
-  if(UTR_PREFIXES.includes(firstFour)){
-    closeModal('qrModal'); // close QR modal
+      const upiUrl = `upi://pay?pa=${UPI_ID}&pn=${MERCHANT_NAME}&am=${amount}&cu=INR`;
 
-    // Show success modal
-    document.getElementById('successService').innerText = `Service: ${currentService.name}`;
-    const userInput = document.getElementById('verifyInput').value.trim();
-    document.getElementById('successUserInput').innerText = `Your input: ${userInput}`;
+      const canvas = document.getElementById('qrcode');
+      canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
 
-    document.getElementById('paymentSuccessModal').style.display='flex';
-  } else {
-    alert('Payment not completed ❌Wrong UTR');
-    document.getElementById('utrInput').value='';
-  }
-}
+      QRCode.toCanvas(canvas, upiUrl, { width: 260, margin: 1 }, err => {
+        if (err) console.error(err);
+      });
 
-renderServices();
-</script>
+      document.getElementById('qrExpiredMsg') && (document.getElementById('qrExpiredMsg').style.display = 'none');
+      document.getElementById('reloadQRBtn').style.display = 'none';
+      document.getElementById('qrcode').style.display = 'block';
+      document.getElementById('utrInput').value = '';
+
+      document.getElementById('qrModal').style.display = 'flex';
+      startCountdown(10 * 60); // 10 minutes
+    }
+
+    function startCountdown(seconds){
+      clearInterval(timerInterval);
+      let timeLeft = seconds;
+      const el = document.getElementById('countdown');
+
+      el.innerText = formatTime(timeLeft);
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        el.innerText = formatTime(timeLeft);
+        if(timeLeft <= 0){
+          clearInterval(timerInterval);
+          document.getElementById('qrcode').style.display = 'none';
+          document.getElementById('reloadQRBtn').style.display = 'block';
+        }
+      }, 1000);
+    }
+
+    function formatTime(sec){
+      let m = Math.floor(sec/60);
+      let s = sec % 60;
+      return `Time Left: ${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    document.getElementById('reloadQRBtn').onclick = () => openQR();
+
+    function verifyUTR(){
+      const utr = document.getElementById('utrInput').value.trim();
+      if(!utr){
+        alert("Please enter UTR / Transaction ID");
+        return;
+      }
+      closeModal('qrModal');
+      document.getElementById('successService').innerText = `Service: ${currentService.name}`;
+      document.getElementById('successUserInput').innerText = `Account: ${document.getElementById('verifyInput').value || 'Not Provided'}`;
+      document.getElementById('paymentSuccessModal').style.display = 'flex';
+    }
+
+    // Start the website
+    renderServices();
+  </script>
 </body>
 </html>
